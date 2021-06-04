@@ -10,8 +10,7 @@ import {VaccinationFacility} from "../model/vaccinationFacility";
 })
 export class ViewComponent implements OnInit {
 
-  vaccinationTerms!: VaccinationTerm;
-  vaccinationFacility!: VaccinationFacility;
+  vaccinationTerms!: Array<VaccinationTerm>;
 
 
   constructor(private termsService: TermsService) {
@@ -24,7 +23,7 @@ export class ViewComponent implements OnInit {
   load() {
     this.termsService.getTerms().subscribe(terms => {
       this.vaccinationTerms = terms;
-      this.vaccinationFacility = terms.vaccinationFacility
+      console.log(terms)
     });
   }
 

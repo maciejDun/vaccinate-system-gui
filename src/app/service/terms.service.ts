@@ -10,7 +10,7 @@ export class TermsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getTerms(): Observable<VaccinationTerm> {
-    return this.httpClient.get<VaccinationTerm>('http://localhost:8080/term')
+  public getTerms(): Observable<VaccinationTerm[]> {
+    return this.httpClient.get<VaccinationTerm[]>('http://localhost:8080/terms')
   }
 }
