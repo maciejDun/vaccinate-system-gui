@@ -3,14 +3,15 @@
 <ng-container *ngIf="vaccinationTerms">
 
   <div *ngFor="let term of vaccinationTerms">
-    {{term.vaccinationDate}} <br>
+    <div class="term">
+      {{term.vaccinationDate}} <br>
     {{term.vaccinationDate}} <br>
     <br>
     {{term.vaccinationFacility.country}} <br>
     {{term.vaccinationFacility.state}} <br>
     {{term.vaccinationFacility.city}} <br>
     {{term.vaccinationFacility.streetAndNumber}} <br>
-
+    </div>
   </div>
 </ng-container>
 

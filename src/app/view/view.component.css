@@ -1,0 +1,9 @@
+.term {
+  background-color: #2f3336;
+  color: #efefef;
+  padding: 20px;
+  width: 500px;
+  margin: 20px auto;
+  font-size: 26px;
+  font-family: 'Open Sans', sans-serif;
+}
