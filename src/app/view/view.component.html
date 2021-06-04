@@ -1,0 +1,15 @@
+<button (click)="load()">Load terms</button>
+<br/>
+<ng-container *ngIf="vaccinationTerms">
+  {{vaccinationTerms.id}} <br>
+  {{vaccinationTerms.creationDate}} <br>
+  {{vaccinationTerms.vaccinationDate}} <br>
+<br>
+  {{vaccinationFacility.country}} <br>
+  {{vaccinationFacility.city}} <br>
+  {{vaccinationFacility.state}} <br>
+  {{vaccinationFacility.streetAndNumber}} <br>
+</ng-container>
+
+
+
