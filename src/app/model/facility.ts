@@ -1,4 +1,4 @@
-export interface VaccinationFacility {
+export interface Facility {
   id: number;
   country: string;
   state: string;

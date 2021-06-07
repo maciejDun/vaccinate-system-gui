@@ -5,12 +5,11 @@
   <div *ngFor="let term of vaccinationTerms">
     <div class="term">
       {{term.vaccinationDate}} <br>
-    {{term.vaccinationDate}} <br>
-    <br>
-    {{term.vaccinationFacility.country}} <br>
-    {{term.vaccinationFacility.state}} <br>
-    {{term.vaccinationFacility.city}} <br>
-    {{term.vaccinationFacility.streetAndNumber}} <br>
+      <br>
+      {{term.facility.country}} <br>
+      {{term.facility.state}} <br>
+      {{term.facility.city}} <br>
+      {{term.facility.streetAndNumber}} <br>
     </div>
   </div>
 </ng-container>

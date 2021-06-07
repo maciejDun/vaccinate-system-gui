@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TermsService} from "../service/terms.service";
-import {VaccinationTerm} from "../model/vaccinationTerm";
-import {VaccinationFacility} from "../model/vaccinationFacility";
+import {Term} from "../model/term";
 
 @Component({
   selector: 'app-view',
@@ -10,7 +9,7 @@ import {VaccinationFacility} from "../model/vaccinationFacility";
 })
 export class ViewComponent implements OnInit {
 
-  vaccinationTerms!: Array<VaccinationTerm>;
+  vaccinationTerms!: Array<Term>;
 
 
   constructor(private termsService: TermsService) {
