@@ -1,18 +1,5 @@
-<button (click)="load()">Load terms</button>
-<br/>
-<ng-container *ngIf="vaccinationTerms">
-
-  <div *ngFor="let term of vaccinationTerms">
-    <div class="term">
-      {{term.vaccinationDate}} <br>
-      <br>
-      {{term.facility.country}} <br>
-      {{term.facility.state}} <br>
-      {{term.facility.city}} <br>
-      {{term.facility.streetAndNumber}} <br>
-    </div>
-  </div>
-</ng-container>
+<app-admin-view></app-admin-view>
+<!--<app-user-view></app-user-view>-->
 
 
 

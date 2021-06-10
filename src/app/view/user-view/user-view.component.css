@@ -1,0 +1,14 @@
+.term {
+  background-color: #2f3336;
+  color: #efefef;
+  padding: 20px;
+  width: 500px;
+  height: 220px;
+  margin: 20px auto;
+  font-size: 26px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.term:hover {
+  background-color: #3f4447;
+}

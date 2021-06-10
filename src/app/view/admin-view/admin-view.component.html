@@ -1,0 +1,32 @@
+<div class="termButton">
+  <button (click)="loadTerm()">Load terms</button>
+</div>
+<div class="termButton">
+  <button (click)="closeTerms()">Close terms</button>
+</div>
+<div class="termButton">
+  <button (click)="createTerm()">Create terms</button>
+</div>
+<br/>
+<ng-container *ngIf="vaccinationTerms && closeTerm">
+  <div *ngFor="let term of vaccinationTerms">
+    <div class="term">
+      {{term.vaccinationDate}} <br>
+      <br>
+      {{term.facility.country}} <br>
+      {{term.facility.state}} <br>
+      {{term.facility.city}} <br>
+      {{term.facility.address}} <br>
+      <div class="deleteButtonDiv">
+        <button class="deleteButton" (click)="deleteTerm(term.id); loadTerm()">Delete term</button>
+      </div>
+
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="createTermValue">
+  <div class="createTerm">
+  <input name="date"/> Date
+  <input name="facilityId"/> Facility id
+  </div>
+  </ng-container>

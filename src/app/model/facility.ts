@@ -3,5 +3,5 @@ export interface Facility {
   country: string;
   state: string;
   city: string;
-  streetAndNumber: string;
+  address: string;
 }

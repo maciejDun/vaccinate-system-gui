@@ -11,6 +11,11 @@ export class TermsService {
   constructor(private httpClient: HttpClient) { }
 
   public getTerms(): Observable<Term[]> {
-    return this.httpClient.get<Term[]>('http://localhost:8080/test/terms')
+    return this.httpClient.get<Term[]>('http://localhost:8080/user/terms')
+  }
+
+  public deleteTerm(id: number): Observable<any> {
+    let url = 'http://localhost:8080/admin/terms/' + id;
+    return this.httpClient.delete(url);
   }
 }
