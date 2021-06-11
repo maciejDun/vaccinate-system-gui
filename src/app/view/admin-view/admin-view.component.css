@@ -1,34 +1,5 @@
-.term {
-  background-color: #2f3336;
-  padding: 20px;
-  width: 500px;
-  height: 220px;
-  margin: 20px auto;
-  font-size: 26px;
-  font-family: 'Open Sans', sans-serif;
-  color: #efefef;
-}
-
-.term:hover {
-  background-color: #3f4447;
-}
-
-.termButton {
-  width: 200px;
-  height: 30px;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.deleteButton {
-  float: right;
-  background-color: crimson;
-  display: inline-block;
-}
-
-.createTerm {
-  background-color: #2f3336;
-  padding: 20px;
+.title {
+  font-size: 30px;
   font-family: 'Open Sans', sans-serif;
   color: #efefef;
   text-align: center;

@@ -1,0 +1,32 @@
+<div class="controllButtons">
+  <div class="userButton">
+    <button (click)="clickLoad()">Load users/close</button>
+  </div>
+  <div class="userButton">
+    <button (click)="openCreateUserTable()">Create user/close</button>
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+<ng-container *ngIf="users && closeUserList">
+  <div *ngFor="let user of users">
+    <div class="user">
+      Id: {{user.id}} <br><br>
+      Username: {{user.userName}} <br><br>
+      Roles: {{user.roles}} <br><br>
+      <div class="deleteButtonDiv">
+        <button class="deleteButton" (click)="deleteUser(user.id)">Delete user</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="closeCreateList">
+  <div class="createUser">
+    <p class="title">Create User</p>
+    <input type="text" [(ngModel)]="userName"> Username
+    <input type="text" [(ngModel)]="roles"> Roles
+    <br><br>
+    <button (click)="addUser()">Add user</button>
+  </div>
+</ng-container>

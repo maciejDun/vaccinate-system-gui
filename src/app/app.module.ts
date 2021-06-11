@@ -8,19 +8,26 @@ import {HttpClientModule} from "@angular/common/http";
 import { AdminViewComponent } from './view/admin-view/admin-view.component';
 import { UserViewComponent } from './view/user-view/user-view.component';
 import {DateService} from "./service/date.service";
+import {FormsModule} from "@angular/forms";
+import { TermComponent } from './view/admin-view/term/term.component';
+import { UsersComponent } from './view/admin-view/users/users.component';
+import {UsersService} from "./service/users.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     ViewComponent,
     AdminViewComponent,
-    UserViewComponent
+    UserViewComponent,
+    TermComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [TermsService, DateService],
+  providers: [TermsService, DateService, UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
