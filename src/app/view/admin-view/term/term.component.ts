@@ -1,34 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {Term} from "../../../model/term";
 import {TermsService} from "../../../service/terms.service";
 import {DateService} from "../../../service/date.service";
+import {Problem} from "../../../model/problem";
+import {Error} from "../../../model/error";
 
 @Component({
   selector: 'app-term',
   templateUrl: './term.component.html',
   styleUrls: ['./term.component.css']
 })
-export class TermComponent{
+export class TermComponent {
 
   vaccinationTerms!: Array<Term>;
-  closeTerm: boolean = false;
-  createTermValue!: boolean;
-
   vaccinationDate!: string;
   facilityId!: number;
 
+  problemOrSuccess: boolean = true;
+  closeTerm: boolean = false;
+  createTermValue!: boolean;
+
+  problem!: Problem;
+  success!: Term;
+
+
   constructor(private termsService: TermsService, private dateService: DateService) {
-  }
-
-
-  mapDate() {
-    this.vaccinationTerms.map(term => {
-      term.vaccinationDate = this.formatDate(term);
-    });
-  }
-
-  formatDate(term: Term) {
-    return this.dateService.formatDate(term.vaccinationDate);
   }
 
   clickLoad() {
@@ -49,17 +45,35 @@ export class TermComponent{
     this.reloadTerm();
   }
 
-  private reloadTerm() {
-    setTimeout(() => this.loadTerm(), 500);
-  }
-
   openCreateTermTable() {
     this.closeTerm = false;
     this.createTermValue = !this.createTermValue;
   }
 
   addTerm() {
-    this.termsService.postTerm(this.vaccinationDate, this.facilityId).subscribe();
+    let formattedDataForSave = this.formatDateForSave(this.vaccinationDate)
+    this.termsService.postTerm(formattedDataForSave, this.facilityId).subscribe(
+      data => this.success = (<Term>data),
+      error => this.problem = (<Error>error).error);
   }
+
+  private reloadTerm() {
+    setTimeout(() => this.loadTerm(), 500);
+  }
+
+  private mapDate() {
+    this.vaccinationTerms.map(term => {
+      term.vaccinationDate = this.formatDateForView(term);
+    });
+  }
+
+  private formatDateForView(term: Term) {
+    return this.dateService.formatDateForView(term.vaccinationDate);
+  }
+
+  private formatDateForSave(date: string) {
+    return this.dateService.formatDateForSave(date);
+  }
+
 
 }

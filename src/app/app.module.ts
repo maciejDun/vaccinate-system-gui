@@ -12,6 +12,10 @@ import {FormsModule} from "@angular/forms";
 import { TermComponent } from './view/admin-view/term/term.component';
 import { UsersComponent } from './view/admin-view/users/users.component';
 import {UsersService} from "./service/users.service";
+import { VaccinatedUsersComponent } from './view/admin-view/vaccinated-users/vaccinated-users.component';
+import {VaccinatedUsersService} from "./service/vaccinated-users.service";
+import { FacilityComponent } from './view/admin-view/facility/facility.component';
+import {FacilityService} from "./service/facility.service";
 
 @NgModule({
   declarations: [
@@ -20,14 +24,16 @@ import {UsersService} from "./service/users.service";
     AdminViewComponent,
     UserViewComponent,
     TermComponent,
-    UsersComponent
+    UsersComponent,
+    VaccinatedUsersComponent,
+    FacilityComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [TermsService, DateService, UsersService],
+  providers: [TermsService, DateService, UsersService, VaccinatedUsersService, FacilityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

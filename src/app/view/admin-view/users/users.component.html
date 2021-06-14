@@ -1,13 +1,3 @@
-<div class="controllButtons">
-  <div class="userButton">
-    <button (click)="clickLoad()">Load users/close</button>
-  </div>
-  <div class="userButton">
-    <button (click)="openCreateUserTable()">Create user/close</button>
-  </div>
-  <div style="clear:both;"></div>
-</div>
-
 <ng-container *ngIf="users && closeUserList">
   <div *ngFor="let user of users">
     <div class="user">
@@ -24,9 +14,24 @@
 <ng-container *ngIf="closeCreateList">
   <div class="createUser">
     <p class="title">Create User</p>
-    <input type="text" [(ngModel)]="userName"> Username
-    <input type="text" [(ngModel)]="roles"> Roles
+    <input type="text" [(ngModel)]="userName"> Username (format: email)
+    <input type="text" [(ngModel)]="roles"> Roles (format: ROLE_XXXX)
     <br><br>
     <button (click)="addUser()">Add user</button>
+    <div *ngIf="success">
+      <br>
+      You successfully created user: <br> <br>
+      Username: {{success.userName}}  <br>
+      <br>
+      Id: {{success.id}} <br>
+      Role: {{success.roles}} <br>
+    </div>
+    <div *ngIf="problem">
+      <br>
+      An error occurred: <br><br>
+      Details: {{problem.detail}} <br>
+      Status: {{problem.status}} <br>
+      Title: {{problem.title}} <br>
+    </div>
   </div>
 </ng-container>

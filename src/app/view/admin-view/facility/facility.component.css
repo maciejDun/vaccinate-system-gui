@@ -1,17 +1,4 @@
-.controllButtons {
-  width: 600px;
-  height: auto;
-}
-
-.userButton {
-  width: 150px;
-  height: 30px;
-  text-align: center;
-  margin-top: 50px;
-  float: left;
-}
-
-.user {
+.facility {
   background-color: #2f3336;
   padding: 20px;
   width: 700px;
@@ -23,8 +10,9 @@
   position: relative;
 }
 
-.user:hover {
-  background-color: #3f4447;
+.controllButtons {
+  width: 600px;
+  height: auto;
 }
 
 .deleteButton {
@@ -38,7 +26,7 @@
   right: 5px;
 }
 
-.createUser {
+.addFacility {
   background-color: #2f3336;
   padding: 20px;
   font-family: 'Open Sans', sans-serif;
@@ -48,6 +36,14 @@
   margin-right: auto;
   margin-left: auto;
   margin-top: 20px;
+}
+
+.facilityInput {
+  width: 300px;
+  text-align: left;
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .title {

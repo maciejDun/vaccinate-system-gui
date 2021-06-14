@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {UsersService} from "../../../service/users.service";
 import {User} from "../../../model/user";
 import {Roles} from "../../../model/roles";
+import {Problem} from "../../../model/problem";
+import {Error} from "../../../model/error";
 
 @Component({
   selector: 'app-users',
@@ -14,6 +16,9 @@ export class UsersComponent {
 
   userName!: string;
   roles!: Roles;
+
+  success!: User;
+  problem!: Problem;
 
   closeUserList: boolean = false;
   closeCreateList: boolean = false;
@@ -33,10 +38,6 @@ export class UsersComponent {
   });
   }
 
-  reloadUsers() {
-    setTimeout(() => this.loadUsers(), 500);
-  }
-
   deleteUser(id: number) {
     this.userService.deleteUser(id).subscribe();
     this.reloadUsers();
@@ -48,6 +49,13 @@ export class UsersComponent {
   }
 
   addUser() {
-    this.userService.postUser(this.userName, this.roles).subscribe();
+    this.userService.postUser(this.userName, this.roles).subscribe(
+      success => this.success = (<User>success),
+      error => this.problem = (<Error>error).error
+    );
+  }
+
+  private reloadUsers() {
+    setTimeout(() => this.loadUsers(), 500);
   }
 }

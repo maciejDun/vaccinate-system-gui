@@ -21,11 +21,6 @@
   float: left;
 }
 
-.controllButtons {
-  width: 600px;
-  height: auto;
-}
-
 .deleteButton {
   float: right;
   background-color: crimson;
@@ -38,6 +33,9 @@
   font-family: 'Open Sans', sans-serif;
   color: #efefef;
   text-align: center;
+  width: 700px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .title {

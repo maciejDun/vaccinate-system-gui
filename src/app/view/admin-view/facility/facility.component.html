@@ -1,0 +1,47 @@
+<ng-container *ngIf="facilities && closeFacilitiesList">
+  <div *ngFor="let facility of facilities">
+    <div class="facility">
+      Id: {{facility.id}} <br>
+      Country: {{facility.country}} <br>
+      City: {{facility.city}} <br>
+      State: {{facility.state}} <br>
+      Address: {{facility.address}} <br>
+      <div class="deleteButtonDiv">
+        <button class="deleteButton" (click)="deleteFacility(facility.id)">Delete facility</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="closeCreateList">
+  <div class="addFacility">
+    <p class="title">Add Facility</p>
+    <div class="facilityInput">
+      <input type="text" [(ngModel)]="country"> Country <br>
+      <input type="text" [(ngModel)]="state"> State <br>
+      <input type="text" [(ngModel)]="city"> City <br>
+      <input type="text" [(ngModel)]="address"> Address <br>
+    </div>
+    <br><br>
+    <button (click)="addFacility(country, state, city, address)">Add facility</button>
+
+    <div *ngIf="success">
+      <br>
+      You successfully added facility: <br> <br>
+      Id: {{success.id}}  <br>
+      <br>
+      Country: {{success.country}} <br>
+      State: {{success.state}} <br>
+      City: {{success.city}} <br>
+      Address: {{success.address}} <br>
+    </div>
+    <div *ngIf="problem">
+      <br>
+      An error occurred: <br><br>
+      Details: {{problem.detail}} <br>
+      Status: {{problem.status}} <br>
+      Title: {{problem.title}} <br>
+    </div>
+
+  </div>
+</ng-container>
