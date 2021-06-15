@@ -23,17 +23,17 @@
     <input type="number" [(ngModel)]="facilityId"> Facility id
     <br><br>
     <button (click)="addTerm()">Add term</button>
-    <div *ngIf="success">
+    <div class="success" *ngIf="success && seeSuccess">
       <br>
       You successfully created term: <br> <br>
-      {{success.vaccinationDate}}  <br>
+      Term: {{success.vaccinationDate}}  <br>
       <br>
-      {{success.facility.country}} <br>
-      {{success.facility.state}} <br>
-      {{success.facility.city}} <br>
-      {{success.facility.address}} <br>
+      Country: {{success.facility.country}} <br>
+      State: {{success.facility.state}} <br>
+      City: {{success.facility.city}} <br>
+      Address: {{success.facility.address}} <br>
     </div>
-    <div *ngIf="problem">
+    <div class="problem" *ngIf="problem && seeProblem">
       <br>
       An error occurred: <br><br>
       Details: {{problem.detail}} <br>

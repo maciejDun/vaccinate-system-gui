@@ -22,6 +22,8 @@ export class UsersComponent {
 
   closeUserList: boolean = false;
   closeCreateList: boolean = false;
+  seeSuccess: boolean = false;
+  seeProblem: boolean = false;
 
   constructor(private userService: UsersService) {
   }
@@ -50,12 +52,28 @@ export class UsersComponent {
 
   addUser() {
     this.userService.postUser(this.userName, this.roles).subscribe(
-      success => this.success = (<User>success),
-      error => this.problem = (<Error>error).error
+      success => {
+        this.success = (<User>success);
+        this.seeSuccessDiv();
+      },
+      error => {
+        this.problem = (<Error>error).error;
+        this.seeProblemDiv();
+      }
     );
   }
 
   private reloadUsers() {
     setTimeout(() => this.loadUsers(), 500);
+  }
+
+  private seeProblemDiv() {
+    this.seeSuccess = false;
+    this.seeProblem = true;
+  }
+
+  private seeSuccessDiv() {
+    this.seeSuccess = true;
+    this.seeProblem = false;
   }
 }

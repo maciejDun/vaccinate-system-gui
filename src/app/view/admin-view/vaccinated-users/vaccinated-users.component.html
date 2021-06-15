@@ -18,7 +18,7 @@
     <input type="number" [(ngModel)]="termId"> Term id
     <br><br>
     <button (click)="addVaccinatedUser(userId, termId)">Add user</button>
-    <div *ngIf="success">
+    <div class="success" *ngIf="success && seeSuccess">
       <br>
       You successfully added vaccinated user: <br> <br>
       Id: {{success.id}}  <br>
@@ -26,7 +26,7 @@
       Username: {{success.user.userName}} <br>
       Vaccination date: {{success.term.vaccinationDate}} <br>
     </div>
-    <div *ngIf="problem">
+    <div class="problem" *ngIf="problem && seeProblem">
       <br>
       An error occurred: <br><br>
       Details: {{problem.detail}} <br>

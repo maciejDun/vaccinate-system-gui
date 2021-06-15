@@ -25,7 +25,7 @@
     <br><br>
     <button (click)="addFacility(country, state, city, address)">Add facility</button>
 
-    <div *ngIf="success">
+    <div class="success" *ngIf="success && seeSuccess">
       <br>
       You successfully added facility: <br> <br>
       Id: {{success.id}}  <br>
@@ -35,7 +35,7 @@
       City: {{success.city}} <br>
       Address: {{success.address}} <br>
     </div>
-    <div *ngIf="problem">
+    <div class="problem" *ngIf="problem && seeProblem">
       <br>
       An error occurred: <br><br>
       Details: {{problem.detail}} <br>

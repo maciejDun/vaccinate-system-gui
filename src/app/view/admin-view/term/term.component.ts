@@ -16,9 +16,10 @@ export class TermComponent {
   vaccinationDate!: string;
   facilityId!: number;
 
-  problemOrSuccess: boolean = true;
   closeTerm: boolean = false;
   createTermValue!: boolean;
+  seeSuccess: boolean = false;
+  seeProblem: boolean = false;
 
   problem!: Problem;
   success!: Term;
@@ -53,8 +54,14 @@ export class TermComponent {
   addTerm() {
     let formattedDataForSave = this.formatDateForSave(this.vaccinationDate)
     this.termsService.postTerm(formattedDataForSave, this.facilityId).subscribe(
-      data => this.success = (<Term>data),
-      error => this.problem = (<Error>error).error);
+      data => {
+        this.success = (<Term>data);
+        this.seeSuccessDiv();
+      },
+      error => {
+        this.problem = (<Error>error).error;
+        this.seeProblemDiv();
+      });
   }
 
   private reloadTerm() {
@@ -73,6 +80,16 @@ export class TermComponent {
 
   private formatDateForSave(date: string) {
     return this.dateService.formatDateForSave(date);
+  }
+
+  private seeProblemDiv() {
+    this.seeSuccess = false;
+    this.seeProblem = true;
+  }
+
+  private seeSuccessDiv() {
+    this.seeSuccess = true;
+    this.seeProblem = false;
   }
 
 

@@ -18,7 +18,7 @@
     <input type="text" [(ngModel)]="roles"> Roles (format: ROLE_XXXX)
     <br><br>
     <button (click)="addUser()">Add user</button>
-    <div *ngIf="success">
+    <div class="success" *ngIf="success && seeSuccess">
       <br>
       You successfully created user: <br> <br>
       Username: {{success.userName}}  <br>
@@ -26,7 +26,7 @@
       Id: {{success.id}} <br>
       Role: {{success.roles}} <br>
     </div>
-    <div *ngIf="problem">
+    <div class="problem" *ngIf="problem && seeProblem">
       <br>
       An error occurred: <br><br>
       Details: {{problem.detail}} <br>

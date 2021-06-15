@@ -22,6 +22,8 @@ export class VaccinatedUsersComponent implements OnInit {
 
   closeVaccinatedUserList: boolean = false;
   closeCreateList: boolean = false;
+  seeSuccess: boolean = false;
+  seeProblem: boolean = false;
 
 
   constructor(private vaccinatedUserService: VaccinatedUsersService, private dateService: DateService) { }
@@ -52,8 +54,12 @@ export class VaccinatedUsersComponent implements OnInit {
       success => {
         this.success = (<VaccinatedUser>success);
         this.success.term.vaccinationDate = this.formatDateForView(this.success.term);
+        this.seeSuccessDiv();
       },
-      error => this.problem = (<Error>error).error
+      error => {
+        this.problem = (<Error>error).error;
+        this.seeProblemDiv();
+      }
     );
   }
 
@@ -74,5 +80,15 @@ export class VaccinatedUsersComponent implements OnInit {
 
   private reloadVaccinatedUsers() {
     setTimeout(() => this.loadVaccinatedUsers(), 500);
+  }
+
+  private seeProblemDiv() {
+    this.seeSuccess = false;
+    this.seeProblem = true;
+  }
+
+  private seeSuccessDiv() {
+    this.seeSuccess = true;
+    this.seeProblem = false;
   }
 }
