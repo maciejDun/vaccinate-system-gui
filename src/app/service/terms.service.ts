@@ -12,7 +12,7 @@ export class TermsService {
   }
 
   public getTerms(): Observable<Term[]> {
-    return this.httpClient.get<Term[]>('http://localhost:8080/user/terms')
+    return this.httpClient.get<Term[]>('http://localhost:8080/admin/terms')
   }
 
   public deleteTerm(id: number): Observable<any> {

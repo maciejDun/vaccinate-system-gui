@@ -16,6 +16,8 @@ import { VaccinatedUsersComponent } from './view/admin-view/vaccinated-users/vac
 import {VaccinatedUsersService} from "./service/vaccinated-users.service";
 import { FacilityComponent } from './view/admin-view/facility/facility.component';
 import {FacilityService} from "./service/facility.service";
+import { UserTermComponent } from './view/user-view/user-term/user-term.component';
+import {UserTermsService} from "./service/user-terms.service";
 
 @NgModule({
   declarations: [
@@ -26,14 +28,15 @@ import {FacilityService} from "./service/facility.service";
     TermComponent,
     UsersComponent,
     VaccinatedUsersComponent,
-    FacilityComponent
+    FacilityComponent,
+    UserTermComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [TermsService, DateService, UsersService, VaccinatedUsersService, FacilityService],
+  providers: [TermsService, DateService, UsersService, VaccinatedUsersService, FacilityService, UserTermsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

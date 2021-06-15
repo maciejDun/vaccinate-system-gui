@@ -1,0 +1,21 @@
+<ng-container *ngIf="signedToTerm">
+  <div class="signButtonDiv">
+    <button class="signButton" (click)="unregisterTerm()">Unregister term</button>
+  </div>
+</ng-container>
+<ng-container *ngIf="vaccinationTerms">
+  <div *ngFor="let term of vaccinationTerms">
+    <div class="term">
+      Date: {{term.vaccinationDate}} <br>
+      <br>
+      Country: {{term.facility.country}} <br>
+      State: {{term.facility.state}} <br>
+      City: {{term.facility.city}} <br>
+      Address: {{term.facility.address}} <br>
+      <div class="signButtonDiv">
+        <button class="signButton" (click)="signToTerm(term.id)">Sign to term</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
