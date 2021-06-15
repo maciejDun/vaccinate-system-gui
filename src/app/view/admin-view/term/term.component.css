@@ -1,0 +1,56 @@
+.term {
+  background-color: #2f3336;
+  padding: 20px;
+  width: 500px;
+  height: 220px;
+  margin: 20px auto;
+  font-size: 26px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+}
+
+.term:hover {
+  background-color: #3f4447;
+}
+
+.termButton {
+  width: 150px;
+  height: 30px;
+  text-align: center;
+  margin-top: 20px;
+  float: left;
+}
+
+.deleteButton {
+  float: right;
+  background-color: crimson;
+  display: inline-block;
+}
+
+.createTerm {
+  background-color: #2f3336;
+  padding: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  text-align: center;
+  width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.title {
+  font-size: 30px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  text-align: center;
+}
+
+.success {
+  color: green;
+  font-size: 20px;
+}
+
+.problem {
+  color: crimson;
+  font-size: 20px;
+}

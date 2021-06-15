@@ -1,0 +1,68 @@
+.controllButtons {
+  width: 600px;
+  height: auto;
+}
+
+.userButton {
+  width: 150px;
+  height: 30px;
+  text-align: center;
+  margin-top: 50px;
+  float: left;
+}
+
+.user {
+  background-color: #2f3336;
+  padding: 20px;
+  width: 700px;
+  height: 150px;
+  margin: 20px auto;
+  font-size: 26px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  position: relative;
+}
+
+.user:hover {
+  background-color: #3f4447;
+}
+
+.deleteButton {
+  background-color: crimson;
+  display: inline-block;
+}
+
+.deleteButtonDiv {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.createUser {
+  background-color: #2f3336;
+  padding: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  text-align: center;
+  width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+.title {
+  font-size: 30px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  text-align: center;
+}
+
+.success {
+  color: green;
+  font-size: 20px;
+}
+
+.problem {
+  color: crimson;
+  font-size: 20px;
+}
