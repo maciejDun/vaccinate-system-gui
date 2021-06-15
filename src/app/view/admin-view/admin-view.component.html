@@ -1,0 +1,37 @@
+<p class="title">Welcome to Admin panel</p>
+<div class="controlPanel">
+  <div class="controlButton">
+    <button (click)="clickLoadFacilities()">Load facility/close</button>
+  </div>
+  <div class="controlButton">
+    <button (click)="openAddFacility()">Add facility/close</button>
+  </div>
+  <div style="clear:both;"></div>
+  <div class="controlButton">
+    <button (click)="clickLoadTerms()">Load terms/close</button>
+  </div>
+  <div class="controlButton">
+    <button (click)="openCreateTermTable()">Create terms/close</button>
+  </div>
+  <div style="clear:both;"></div>
+  <div class="controlButton">
+    <button (click)="clickLoadUsers()">Load users/close</button>
+  </div>
+  <div class="controlButton">
+    <button (click)="openCreateUserTable()">Create user/close</button>
+  </div>
+  <div style="clear:both;"></div>
+  <div class="controlButton">
+    <button (click)="clickLoadVaccUsers()">Load vaccinated users/close</button>
+  </div>
+  <div class="controlButton">
+    <button (click)="openAddVaccinatedUser()">Add vaccinated user/close</button>
+  </div>
+  <div style="clear:both;"></div>
+</div>
+<app-facility></app-facility>
+<app-term></app-term>
+<app-users></app-users>
+<app-vaccinated-users></app-vaccinated-users>
+
+

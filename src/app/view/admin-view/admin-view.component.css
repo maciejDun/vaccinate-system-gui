@@ -1,0 +1,21 @@
+.title {
+  font-size: 30px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  text-align: center;
+}
+
+.controlButton {
+  width: 100px;
+  height: auto;
+  text-align: center;
+  margin-top: 50px;
+  margin-left: 20px;
+  float: left;
+}
+
+.controlPanel {
+  width: 300px;
+  height: auto;
+  float: left;
+}

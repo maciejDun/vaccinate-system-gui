@@ -1,0 +1,64 @@
+.facility {
+  background-color: #2f3336;
+  padding: 20px;
+  width: 700px;
+  height: 150px;
+  margin: 20px auto;
+  font-size: 26px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  position: relative;
+}
+
+.controllButtons {
+  width: 600px;
+  height: auto;
+}
+
+.deleteButton {
+  background-color: crimson;
+  display: inline-block;
+}
+
+.deleteButtonDiv {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.addFacility {
+  background-color: #2f3336;
+  padding: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  text-align: center;
+  width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+.facilityInput {
+  width: 300px;
+  text-align: left;
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.title {
+  font-size: 30px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  text-align: center;
+}
+
+.success {
+  color: green;
+  font-size: 20px;
+}
+
+.problem {
+  color: crimson;
+  font-size: 20px;
+}

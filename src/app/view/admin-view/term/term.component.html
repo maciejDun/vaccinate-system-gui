@@ -1,0 +1,45 @@
+<br/>
+<ng-container *ngIf="vaccinationTerms && closeTerm">
+  <div *ngFor="let term of vaccinationTerms">
+    <div class="term">
+      Id: {{term.id}} <br>
+      Date: {{term.vaccinationDate}} <br>
+      <br>
+      Country: {{term.facility.country}} <br>
+      State: {{term.facility.state}} <br>
+      City: {{term.facility.city}} <br>
+      Address: {{term.facility.address}} <br>
+      <div class="deleteButtonDiv">
+        <button class="deleteButton" (click)="deleteTerm(term.id)">Delete term</button>
+      </div>
+
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="createTermValue">
+  <div class="createTerm">
+    <p class="title">Create Term</p>
+    <input type="text" [(ngModel)]="vaccinationDate"> Date (format: yyyy-mm-dd hh:mm)
+    <input type="number" [(ngModel)]="facilityId"> Facility id
+    <br><br>
+    <button (click)="addTerm()">Add term</button>
+    <div class="success" *ngIf="success && seeSuccess">
+      <br>
+      You successfully created term: <br> <br>
+      Term: {{success.vaccinationDate}}  <br>
+      <br>
+      Country: {{success.facility.country}} <br>
+      State: {{success.facility.state}} <br>
+      City: {{success.facility.city}} <br>
+      Address: {{success.facility.address}} <br>
+    </div>
+    <div class="problem" *ngIf="problem && seeProblem">
+      <br>
+      An error occurred: <br><br>
+      Details: {{problem.detail}} <br>
+      Status: {{problem.status}} <br>
+      Title: {{problem.title}} <br>
+    </div>
+  </div>
+</ng-container>
+
