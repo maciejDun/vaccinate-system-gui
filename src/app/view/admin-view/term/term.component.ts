@@ -37,7 +37,7 @@ export class TermComponent {
   loadTerm() {
     this.termsService.getTerms().subscribe(terms => {
       this.vaccinationTerms = terms;
-      this.mapDate();
+      this.mapDate(terms);
     });
   }
 
@@ -68,8 +68,8 @@ export class TermComponent {
     setTimeout(() => this.loadTerm(), 500);
   }
 
-  private mapDate() {
-    this.vaccinationTerms.map(term => {
+  private mapDate(terms: Array<Term>) {
+    terms.map(term => {
       term.vaccinationDate = this.formatDateForView(term);
     });
   }

@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {UsersService} from "../../../service/users.service";
 import {User} from "../../../model/user";
-import {Roles} from "../../../model/roles";
 import {Problem} from "../../../model/problem";
 import {Error} from "../../../model/error";
 
@@ -15,7 +14,7 @@ export class UsersComponent {
   users!: Array<User>;
 
   userName!: string;
-  roles!: Roles;
+  roleId!: number;
 
   success!: User;
   problem!: Problem;
@@ -51,7 +50,7 @@ export class UsersComponent {
   }
 
   addUser() {
-    this.userService.postUser(this.userName, this.roles).subscribe(
+    this.userService.postUser(this.userName, this.roleId).subscribe(
       success => {
         this.success = (<User>success);
         this.seeSuccessDiv();

@@ -20,8 +20,8 @@ export class UsersService {
     return this.httpClient.delete('http://localhost:8080/admin/users/' + id);
   }
 
-  public postUser(name: string, roles: Roles) {
-    let body = {userName: name, roles: roles}
+  public postUser(name: string, roleId: number) {
+    let body = {userName: name, roleId: roleId}
     return this.httpClient.post('http://localhost:8080/admin/users', body);
   }
 }
