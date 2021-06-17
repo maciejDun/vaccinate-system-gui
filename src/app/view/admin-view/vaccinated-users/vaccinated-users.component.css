@@ -65,3 +65,9 @@
   color: crimson;
   font-size: 20px;
 }
+
+.alert {
+  color: crimson;
+  font-size: 20px;
+  margin-bottom: 20px;
+}

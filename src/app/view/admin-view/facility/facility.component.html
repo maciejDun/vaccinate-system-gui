@@ -17,13 +17,40 @@
   <div class="addFacility">
     <p class="title">Add Facility</p>
     <div class="facilityInput">
-      <input type="text" [(ngModel)]="country"> Country <br>
-      <input type="text" [(ngModel)]="state"> State <br>
-      <input type="text" [(ngModel)]="city"> City <br>
-      <input type="text" [(ngModel)]="address"> Address <br>
+      <input type="text" required="required" #countryInput="ngModel" [(ngModel)]="country">
+      <label>Country</label> <br>
+
+      <input type="text" required="required" #stateInput="ngModel" [(ngModel)]="state">
+      <label>State</label> <br>
+
+      <input type="text" required="required" #cityInput="ngModel" [(ngModel)]="city">
+      <label>City</label> <br>
+
+      <input type="text" required="required" #addressInput="ngModel" [(ngModel)]="address">
+      <label>Address</label> <br>
     </div>
     <br><br>
-    <button (click)="addFacility(country, state, city, address)">Add facility</button>
+
+    <div *ngIf="countryInput.invalid && (countryInput.dirty || countryInput.touched)"
+         class="alert">
+      Country is required
+    </div>
+    <div *ngIf="stateInput.invalid && (stateInput.dirty || stateInput.touched)"
+         class="alert">
+      State is required
+    </div>
+    <div *ngIf="cityInput.invalid && (cityInput.dirty || cityInput.touched)"
+         class="alert">
+      City is required
+    </div>
+    <div *ngIf="addressInput.invalid && (addressInput.dirty || addressInput.touched)"
+         class="alert">
+      Address is required
+    </div>
+
+    <button (click)="countryInput.valid && stateInput.valid && cityInput.valid && addressInput.valid
+     && addFacility(country, state, city, address)">Add facility
+    </button>
 
     <div class="success" *ngIf="success && seeSuccess">
       <br>
