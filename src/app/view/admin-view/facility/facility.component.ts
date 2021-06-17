@@ -11,16 +11,17 @@ import {Error} from "../../../model/error";
 })
 export class FacilityComponent {
 
-  closeFacilitiesList: boolean = false;
-  closeCreateList: boolean = false;
-  seeSuccess: boolean = false;
-  seeProblem: boolean = false;
-
   facilities!: Array<Facility>;
+
   country!: string;
   state!: string;
   city!: string;
   address!: string;
+
+  closeFacilitiesList: boolean = false;
+  closeCreateList: boolean = false;
+  seeSuccess: boolean = false;
+  seeProblem: boolean = false;
 
   success!: Facility;
   problem!: Problem;
@@ -31,7 +32,9 @@ export class FacilityComponent {
   clickLoad() {
     this.closeFacilitiesList = !this.closeFacilitiesList;
     this.closeCreateList = false;
-    this.loadFacilities();
+    if (this.closeFacilitiesList) {
+      this.loadFacilities();
+    }
   }
 
   openAddFacility() {
@@ -41,9 +44,8 @@ export class FacilityComponent {
 
   private loadFacilities() {
     this.facilityService.getFacilities().subscribe(facilities => {
-        this.facilities = facilities;
-      }
-    );
+      this.facilities = facilities;
+    });
   }
 
   deleteFacility(id: number) {

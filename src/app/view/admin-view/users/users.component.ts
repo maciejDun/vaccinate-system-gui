@@ -1,42 +1,57 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../../../service/users.service";
 import {User} from "../../../model/user";
 import {Problem} from "../../../model/problem";
 import {Error} from "../../../model/error";
+import {RoleService} from "../../../service/role.service";
+import {Role} from "../../../model/role";
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
 
   users!: Array<User>;
+  roles!: Role[];
 
   userName!: string;
   roleId!: number;
-
-  success!: User;
-  problem!: Problem;
 
   closeUserList: boolean = false;
   closeCreateList: boolean = false;
   seeSuccess: boolean = false;
   seeProblem: boolean = false;
 
-  constructor(private userService: UsersService) {
+  success!: User;
+  problem!: Problem;
+
+  constructor(private userService: UsersService, private roleService: RoleService) {
+  }
+
+  ngOnInit(): void {
+    this.loadRoles();
   }
 
   clickLoad() {
     this.closeUserList = !this.closeUserList;
     this.closeCreateList = false;
-    this.loadUsers()
+    if (this.closeUserList) {
+      this.loadUsers()
+    }
   }
 
   loadUsers() {
     this.userService.getUsers().subscribe(users => {
       this.users = users;
-  });
+    });
+  }
+
+  loadRoles() {
+    this.roleService.getRoles().subscribe(roles => {
+      this.roles = roles;
+    });
   }
 
   deleteUser(id: number) {

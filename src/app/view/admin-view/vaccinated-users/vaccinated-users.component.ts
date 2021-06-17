@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {VaccinatedUsersService} from "../../../service/vaccinated-users.service";
 import {VaccinatedUser} from "../../../model/vaccinated.user";
 import {DateService} from "../../../service/date.service";
 import {Term} from "../../../model/term";
 import {Problem} from "../../../model/problem";
 import {Error} from "../../../model/error";
+import {UsersService} from "../../../service/users.service";
+import {TermsService} from "../../../service/terms.service";
+import {User} from "../../../model/user";
 
 @Component({
   selector: 'app-vaccinated-users',
@@ -14,33 +17,58 @@ import {Error} from "../../../model/error";
 export class VaccinatedUsersComponent implements OnInit {
 
   vaccinatedUsers!: Array<VaccinatedUser>;
+  vaccinationTerms!: Term[];
+  users!: User[];
+
   userId!: number;
   termId!: number;
-
-  success!: VaccinatedUser;
-  problem!: Problem;
+  selectedUserId!: number;
+  selectedTermId!: number;
 
   closeVaccinatedUserList: boolean = false;
   closeCreateList: boolean = false;
   seeSuccess: boolean = false;
   seeProblem: boolean = false;
 
+  success!: VaccinatedUser;
+  problem!: Problem;
 
-  constructor(private vaccinatedUserService: VaccinatedUsersService, private dateService: DateService) { }
+  constructor(private vaccinatedUserService: VaccinatedUsersService, private dateService: DateService,
+              private userService: UsersService, private termsService: TermsService) {
+  }
 
   ngOnInit(): void {
+    this.loadTerm();
+    this.loadUser();
   }
 
   clickLoad() {
     this.closeVaccinatedUserList = !this.closeVaccinatedUserList;
     this.closeCreateList = false;
-    this.loadVaccinatedUsers();
+    if (this.closeVaccinatedUserList) {
+      this.loadVaccinatedUsers();
+    }
   }
 
   loadVaccinatedUsers() {
     this.vaccinatedUserService.getVaccinatedUsers().subscribe(users => {
       this.vaccinatedUsers = users;
-      this.mapDate(this.vaccinatedUsers);
+      this.mapVaccUserDate(this.vaccinatedUsers);
+    });
+  }
+
+  //todo load only free terms
+  loadTerm() {
+    this.termsService.getTerms().subscribe(terms => {
+      this.vaccinationTerms = terms;
+      this.mapTermDate(terms);
+    });
+  }
+
+  //todo load only free users
+  loadUser() {
+    this.userService.getUsers().subscribe(users => {
+      this.users = users;
     });
   }
 
@@ -68,9 +96,15 @@ export class VaccinatedUsersComponent implements OnInit {
     this.reloadVaccinatedUsers();
   }
 
-  private mapDate(vaccinatedUsers: Array<VaccinatedUser>) {
+  private mapVaccUserDate(vaccinatedUsers: Array<VaccinatedUser>) {
     vaccinatedUsers.map(vaccUser => {
       vaccUser.term.vaccinationDate = this.formatDateForView(vaccUser.term);
+    });
+  }
+
+  private mapTermDate(terms: Array<Term>) {
+    terms.map(term => {
+      term.vaccinationDate = this.formatDateForView(term);
     });
   }
 

@@ -16,6 +16,7 @@
 <ng-container *ngIf="closeCreateList">
   <div class="addFacility">
     <p class="title">Add Facility</p>
+
     <div class="facilityInput">
       <input type="text" required="required" #countryInput="ngModel" [(ngModel)]="country">
       <label>Country</label> <br>
@@ -29,6 +30,7 @@
       <input type="text" required="required" #addressInput="ngModel" [(ngModel)]="address">
       <label>Address</label> <br>
     </div>
+
     <br><br>
 
     <div *ngIf="countryInput.invalid && (countryInput.dirty || countryInput.touched)"
@@ -62,6 +64,7 @@
       City: {{success.city}} <br>
       Address: {{success.address}} <br>
     </div>
+
     <div class="problem" *ngIf="problem && seeProblem">
       <br>
       An error occurred: <br><br>

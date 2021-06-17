@@ -25,9 +25,14 @@
     <input type="text" required="required"
            #dateInput="ngModel" [(ngModel)]="vaccinationDate">
 
-    <label>Facility Id</label>
-    <input type="number" required="required"
-           #facilityIdInput="ngModel" [(ngModel)]="facilityId">
+    <br><br>
+
+    <label>Select Facility</label>
+    <select (click)="loadFacilities()" [(ngModel)]="selectedFacilityId" required="required" #facilityIdInput="ngModel">
+      <option *ngFor="let facility of facilities" [value]="facility.id">
+        {{facility.city + ' ' + facility.address}}
+      </option>
+    </select>
 
     <br><br>
 
@@ -37,7 +42,7 @@
     </div>
     <div *ngIf="facilityIdInput.invalid && (facilityIdInput.dirty || facilityIdInput.touched)"
          class="alert">
-      Facility Id is required
+      Facility is required
     </div>
 
     <button (click)="dateInput.valid && facilityIdInput.valid && addTerm()">Add term</button>
@@ -60,6 +65,7 @@
       Status: {{problem.status}} <br>
       Title: {{problem.title}} <br>
     </div>
+
   </div>
 </ng-container>
 

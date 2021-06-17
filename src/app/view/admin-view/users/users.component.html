@@ -21,9 +21,14 @@
     <input type="text" required="required"
            #usernameInput="ngModel" [(ngModel)]="userName">
 
-    <label>Roles (1 - ADMIN, 2 - USER)</label>
-    <input type="number" required="required"
-           #roleInput="ngModel" [(ngModel)]="roleId">
+    <br><br>
+
+    <label>Select Role</label>
+    <select (click)="loadRoles()" [(ngModel)]="roleId" required="required" #roleInput="ngModel">
+      <option *ngFor="let role of roles" [value]="role.id">
+        {{role.roles}}
+      </option>
+    </select>
 
     <br><br>
 
@@ -38,8 +43,6 @@
 
     <button (click)="usernameInput.valid && roleInput.valid && addUser()">Add user</button>
 
-
-
     <div class="success" *ngIf="success && seeSuccess">
       <br>
       You successfully created user: <br> <br>
@@ -49,6 +52,7 @@
       Role:
       <span *ngFor="let role of success.roles">{{role.roles}}  </span>
     </div>
+
     <div class="problem" *ngIf="problem && seeProblem">
       <br>
       An error occurred: <br><br>
@@ -56,6 +60,7 @@
       Status: {{problem.status}} <br>
       Title: {{problem.title}} <br>
     </div>
+
   </div>
 
 </ng-container>
