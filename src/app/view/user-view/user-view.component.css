@@ -1,14 +1,21 @@
-.term {
-  background-color: #2f3336;
-  color: #efefef;
-  padding: 20px;
-  width: 500px;
-  height: 220px;
-  margin: 20px auto;
-  font-size: 26px;
+.title {
+  font-size: 30px;
   font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  text-align: center;
 }
 
-.term:hover {
-  background-color: #3f4447;
+.controlButton {
+  width: 100px;
+  height: auto;
+  text-align: center;
+  margin-top: 50px;
+  margin-left: 20px;
+  float: left;
+}
+
+.controlPanel {
+  width: 300px;
+  height: auto;
+  float: left;
 }

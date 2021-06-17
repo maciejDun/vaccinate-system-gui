@@ -3,7 +3,9 @@
     <div class="user">
       Id: {{user.id}} <br><br>
       Username: {{user.userName}} <br><br>
-      Roles: {{user.roles}} <br><br>
+      Roles:
+      <span *ngFor="let role of user.roles">{{role.roles}}  </span>
+      <br><br>
       <div class="deleteButtonDiv">
         <button class="deleteButton" (click)="deleteUser(user.id)">Delete user</button>
       </div>
@@ -14,18 +16,43 @@
 <ng-container *ngIf="closeCreateList">
   <div class="createUser">
     <p class="title">Create User</p>
-    <input type="text" [(ngModel)]="userName"> Username (format: email)
-    <input type="text" [(ngModel)]="roles"> Roles (format: ROLE_XXXX)
+
+    <label>Username (format: email)</label>
+    <input type="text" required="required"
+           #usernameInput="ngModel" [(ngModel)]="userName">
+
     <br><br>
-    <button (click)="addUser()">Add user</button>
+
+    <label>Select Role</label>
+    <select (click)="loadRoles()" [(ngModel)]="roleId" required="required" #roleInput="ngModel">
+      <option *ngFor="let role of roles" [value]="role.id">
+        {{role.roles}}
+      </option>
+    </select>
+
+    <br><br>
+
+    <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)"
+         class="alert">
+      Username is required
+    </div>
+    <div *ngIf="roleInput.invalid && (roleInput.dirty || roleInput.touched)"
+         class="alert">
+      Role is required
+    </div>
+
+    <button (click)="usernameInput.valid && roleInput.valid && addUser()">Add user</button>
+
     <div class="success" *ngIf="success && seeSuccess">
       <br>
       You successfully created user: <br> <br>
       Username: {{success.userName}}  <br>
       <br>
       Id: {{success.id}} <br>
-      Role: {{success.roles}} <br>
+      Role:
+      <span *ngFor="let role of success.roles">{{role.roles}}  </span>
     </div>
+
     <div class="problem" *ngIf="problem && seeProblem">
       <br>
       An error occurred: <br><br>
@@ -33,5 +60,7 @@
       Status: {{problem.status}} <br>
       Title: {{problem.title}} <br>
     </div>
+
   </div>
+
 </ng-container>

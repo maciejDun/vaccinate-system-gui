@@ -9,6 +9,7 @@
       State: {{term.facility.state}} <br>
       City: {{term.facility.city}} <br>
       Address: {{term.facility.address}} <br>
+
       <div class="deleteButtonDiv">
         <button class="deleteButton" (click)="deleteTerm(term.id)">Delete term</button>
       </div>
@@ -19,10 +20,33 @@
 <ng-container *ngIf="createTermValue">
   <div class="createTerm">
     <p class="title">Create Term</p>
-    <input type="text" [(ngModel)]="vaccinationDate"> Date (format: yyyy-mm-dd hh:mm)
-    <input type="number" [(ngModel)]="facilityId"> Facility id
+
+    <label>Date (format: yyyy-mm-dd hh:mm)</label>
+    <input type="text" required="required"
+           #dateInput="ngModel" [(ngModel)]="vaccinationDate">
+
     <br><br>
-    <button (click)="addTerm()">Add term</button>
+
+    <label>Select Facility</label>
+    <select (click)="loadFacilities()" [(ngModel)]="selectedFacilityId" required="required" #facilityIdInput="ngModel">
+      <option *ngFor="let facility of facilities" [value]="facility.id">
+        {{facility.city + ' ' + facility.address}}
+      </option>
+    </select>
+
+    <br><br>
+
+    <div *ngIf="dateInput.invalid && (dateInput.dirty || dateInput.touched)"
+         class="alert">
+      Date is required
+    </div>
+    <div *ngIf="facilityIdInput.invalid && (facilityIdInput.dirty || facilityIdInput.touched)"
+         class="alert">
+      Facility is required
+    </div>
+
+    <button (click)="dateInput.valid && facilityIdInput.valid && addTerm()">Add term</button>
+
     <div class="success" *ngIf="success && seeSuccess">
       <br>
       You successfully created term: <br> <br>
@@ -33,6 +57,7 @@
       City: {{success.facility.city}} <br>
       Address: {{success.facility.address}} <br>
     </div>
+
     <div class="problem" *ngIf="problem && seeProblem">
       <br>
       An error occurred: <br><br>
@@ -40,6 +65,7 @@
       Status: {{problem.status}} <br>
       Title: {{problem.title}} <br>
     </div>
+
   </div>
 </ng-container>
 

@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Term} from "../../model/term";
-import {TermsService} from "../../service/terms.service";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-user-view',
@@ -9,21 +7,11 @@ import {TermsService} from "../../service/terms.service";
 })
 export class UserViewComponent implements OnInit {
 
-  vaccinationTerms!: Array<Term>;
-
-
-  constructor(private termsService: TermsService) {
+  constructor() {
   }
 
   ngOnInit(): void {
 
-  }
-
-  load() {
-    this.termsService.getTerms().subscribe(terms => {
-      this.vaccinationTerms = terms;
-      console.log(terms)
-    });
   }
 
 }

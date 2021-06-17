@@ -13,11 +13,71 @@
 
 <ng-container *ngIf="closeCreateList">
   <div class="addVaccUser">
-    <p class="title">Add Vaccinated User</p>
-    <input type="number" [(ngModel)]="userId"> User id
-    <input type="number" [(ngModel)]="termId"> Term id
+    <p class="title">Add Vaccinated User by Id</p>
+    <label>User Id</label>
+    <input type="number" required="required"
+           #userIdInput="ngModel" [(ngModel)]="userId">
+
+    <label>Term Id</label>
+    <input type="number" required="required"
+           #termIdInput="ngModel" [(ngModel)]="termId">
     <br><br>
-    <button (click)="addVaccinatedUser(userId, termId)">Add user</button>
+
+    <div *ngIf="userIdInput.invalid && (userIdInput.dirty || userIdInput.touched)"
+         class="alert">
+      User Id is required
+    </div>
+    <div *ngIf="termIdInput.invalid && (termIdInput.dirty || termIdInput.touched)"
+         class="alert">
+      Term Id is required
+    </div>
+
+    <button (click)="userIdInput.valid && termIdInput.valid && addVaccinatedUser(userId, termId)">Add user</button>
+
+  </div>
+</ng-container>
+
+<ng-container *ngIf="closeCreateList">
+  <div class="addVaccUser">
+    <p class="title">Add Vaccinated User from selection</p>
+
+    <label>Select Term</label>
+    <select (click)="loadTerm()" [(ngModel)]="selectedTermId" required="required" #termIdInput="ngModel">
+      <option *ngFor="let term of vaccinationTerms" [value]="term.id">
+        {{term.vaccinationDate + ' ' + term.facility.city + ' ' + term.facility.address}}
+      </option>
+    </select>
+
+    <br><br>
+
+    <label>Select User</label>
+    <select (click)="loadUser()" [(ngModel)]="selectedUserId" required="required" #userIdInput="ngModel">
+      <option *ngFor="let user of users" [value]="user.id">
+        {{user.userName}}
+      </option>
+    </select>
+
+    <br><br>
+
+    <div *ngIf="userIdInput.invalid && (userIdInput.dirty || userIdInput.touched)"
+         class="alert">
+      User is required
+    </div>
+    <div *ngIf="termIdInput.invalid && (termIdInput.dirty || termIdInput.touched)"
+         class="alert">
+      Term is required
+    </div>
+
+    <button (click)="userIdInput.valid && termIdInput.valid
+    && addVaccinatedUser(selectedUserId, selectedTermId)">Add user
+    </button>
+
+  </div>
+</ng-container>
+
+<ng-container *ngIf="success || problem">
+  <div class="addVaccUser">
+
     <div class="success" *ngIf="success && seeSuccess">
       <br>
       You successfully added vaccinated user: <br> <br>
@@ -26,6 +86,7 @@
       Username: {{success.user.userName}} <br>
       Vaccination date: {{success.term.vaccinationDate}} <br>
     </div>
+
     <div class="problem" *ngIf="problem && seeProblem">
       <br>
       An error occurred: <br><br>
@@ -33,6 +94,7 @@
       Status: {{problem.status}} <br>
       Title: {{problem.title}} <br>
     </div>
+
   </div>
 </ng-container>
 
