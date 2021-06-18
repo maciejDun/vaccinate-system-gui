@@ -15,6 +15,10 @@ export class TermsService {
     return this.httpClient.get<Term[]>('http://localhost:8080/admin/terms')
   }
 
+  public getFreeTerms(): Observable<Term[]> {
+    return this.httpClient.get<Term[]>('http://localhost:8080/user/terms')
+  }
+
   public deleteTerm(id: number): Observable<any> {
     let url = 'http://localhost:8080/admin/terms/' + id;
     return this.httpClient.delete(url);

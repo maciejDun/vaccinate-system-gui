@@ -46,8 +46,7 @@ export class TermComponent implements OnInit {
 
   loadTerm() {
     this.termsService.getTerms().subscribe(terms => {
-      this.vaccinationTerms = terms;
-      this.mapDate(terms);
+      this.vaccinationTerms = this.mapDate(terms);
     });
   }
 
@@ -88,6 +87,7 @@ export class TermComponent implements OnInit {
     terms.map(term => {
       term.vaccinationDate = this.formatDateForView(term);
     });
+    return terms;
   }
 
   private formatDateForView(term: Term) {
