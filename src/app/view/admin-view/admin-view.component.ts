@@ -46,6 +46,10 @@ export class AdminViewComponent {
     this.usersComponent.openCreateUserTable();
   }
 
+  openUpdateUserTable() {
+    this.usersComponent.openUpdateUserTable();
+  }
+
   clickLoadVaccUsers() {
     this.vaccUsersComponent.clickLoad();
   }

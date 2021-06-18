@@ -18,11 +18,13 @@ export class UsersComponent implements OnInit {
 
   userName!: string;
   roleId!: number;
+  selectedUserId!: number;
 
   closeUserList: boolean = false;
   closeCreateList: boolean = false;
   seeSuccess: boolean = false;
   seeProblem: boolean = false;
+  closeUpdateList: boolean = false;
 
   success!: User;
   problem!: Problem;
@@ -32,11 +34,13 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadRoles();
+    this.loadUsers();
   }
 
   clickLoad() {
     this.closeUserList = !this.closeUserList;
     this.closeCreateList = false;
+    this.closeUpdateList = false;
     if (this.closeUserList) {
       this.loadUsers()
     }
@@ -61,11 +65,31 @@ export class UsersComponent implements OnInit {
 
   openCreateUserTable() {
     this.closeUserList = false;
+    this.closeUpdateList = false;
     this.closeCreateList = !this.closeCreateList;
+  }
+
+  openUpdateUserTable() {
+    this.closeUserList = false;
+    this.closeCreateList = false;
+    this.closeUpdateList = !this.closeUpdateList;
   }
 
   addUser() {
     this.userService.postUser(this.userName, this.roleId).subscribe(
+      success => {
+        this.success = (<User>success);
+        this.seeSuccessDiv();
+      },
+      error => {
+        this.problem = (<Error>error).error;
+        this.seeProblemDiv();
+      }
+    );
+  }
+
+  updateUser() {
+    this.userService.putUser(this.userName, this.roleId, this.selectedUserId).subscribe(
       success => {
         this.success = (<User>success);
         this.seeSuccessDiv();

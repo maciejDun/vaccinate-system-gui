@@ -27,4 +27,10 @@ export class UsersService {
     let body = {userName: name, roleId: roleId}
     return this.httpClient.post('http://localhost:8080/admin/users', body);
   }
+
+  public putUser(name: string, roleId: number, userId: number) {
+    let body = {id: userId, userName: name, roleId: roleId}
+    return this.httpClient.put('http://localhost:8080/admin/users', body);
+  }
+
 }

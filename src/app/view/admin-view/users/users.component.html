@@ -64,3 +64,67 @@
   </div>
 
 </ng-container>
+
+<ng-container *ngIf="closeUpdateList">
+  <div class="createUser">
+    <p class="title">Update User</p>
+
+
+    <label>Select User</label>
+    <select (click)="loadUsers()" [(ngModel)]="selectedUserId" required="required" #userIdInput="ngModel">
+      <option *ngFor="let user of users" [value]="user.id">
+        {{user.userName}}
+      </option>
+    </select>
+    <br><br>
+
+    <label>New Username (format: email)</label>
+    <input type="text" required="required"
+           #newUsernameInput="ngModel" [(ngModel)]="userName">
+
+    <label>Select Role</label>
+    <select (click)="loadRoles()" [(ngModel)]="roleId" required="required" #roleInput="ngModel">
+      <option *ngFor="let role of roles" [value]="role.id">
+        {{role.roles}}
+      </option>
+    </select>
+
+    <br><br>
+
+    <div *ngIf="userIdInput.invalid && (userIdInput.dirty || userIdInput.touched)"
+         class="alert">
+      Select user
+    </div>
+    <div *ngIf="newUsernameInput.invalid && (newUsernameInput.dirty || newUsernameInput.touched)"
+         class="alert">
+      New username is required
+    </div>
+    <div *ngIf="roleInput.invalid && (roleInput.dirty || roleInput.touched)"
+         class="alert">
+      Role is required
+    </div>
+
+    <button (click)="userIdInput.valid && newUsernameInput.valid && roleInput.valid
+    && updateUser()">Update user
+    </button>
+
+    <div class="success" *ngIf="success && seeSuccess">
+      <br>
+      You successfully updated user: <br> <br>
+      Username: {{success.userName}}  <br>
+      <br>
+      Id: {{success.id}} <br>
+      Role:
+      <span *ngFor="let role of success.roles">{{role.roles}}  </span>
+    </div>
+
+    <div class="problem" *ngIf="problem && seeProblem">
+      <br>
+      An error occurred: <br><br>
+      Details: {{problem.detail}} <br>
+      Status: {{problem.status}} <br>
+      Title: {{problem.title}} <br>
+    </div>
+
+  </div>
+</ng-container>
