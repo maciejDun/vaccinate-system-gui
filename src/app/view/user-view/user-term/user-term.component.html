@@ -1,9 +1,9 @@
-<ng-container *ngIf="signedToTerm">
-  <div class="signButtonDiv">
+<ng-container>
+  <div class="ButtonDiv">
     <button class="signButton" (click)="unregisterTerm()">Unregister term</button>
   </div>
 </ng-container>
-<ng-container *ngIf="vaccinationTerms">
+<ng-container *ngIf="vaccinationTerms && seeTerms && !registeredTerm">
   <div *ngFor="let term of vaccinationTerms">
     <div class="term">
       Date: {{term.vaccinationDate}} <br>
@@ -16,6 +16,37 @@
         <button class="signButton" (click)="signToTerm(term.id)">Sign to term</button>
       </div>
     </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="registeredTerm || problem">
+  <div class="registerTerm">
+
+    <div class="success" *ngIf="registeredTerm && seeSuccess">
+      <br>
+      You successfully registered to term: <br> <br>
+      Term: {{registeredTerm.vaccinationDate}}  <br>
+      <br>
+      Country: {{registeredTerm.facility.country}} <br>
+      State: {{registeredTerm.facility.state}} <br>
+      City: {{registeredTerm.facility.city}} <br>
+      Address: {{registeredTerm.facility.address}} <br>
+    </div>
+
+    <div class="success" *ngIf="seeUnregister">
+      <br>
+      You have been successfully unregistered <br> <br>
+    </div>
+
+
+    <div class="problem" *ngIf="problem && seeProblem">
+      <br>
+      An error occurred: <br><br>
+      Details: {{problem.detail}} <br>
+      Status: {{problem.status}} <br>
+      Title: {{problem.title}} <br>
+    </div>
+
   </div>
 </ng-container>
 

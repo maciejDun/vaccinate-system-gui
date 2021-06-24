@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../model/user";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class UsersService {
 
   public getUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>('http://localhost:8080/admin/users')
+  }
+
+  loadCurrentUser(): Observable<User> {
+    return this.httpClient.get<User>(environment.baseUrl + '/user');
   }
 
   public getNotRegisteredUsers(): Observable<User[]> {

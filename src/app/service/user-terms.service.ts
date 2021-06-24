@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Term} from "../model/term";
 import {HttpClient} from "@angular/common/http";
@@ -8,13 +8,18 @@ import {HttpClient} from "@angular/common/http";
 })
 export class UserTermsService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   public getTerms(): Observable<Term[]> {
     return this.httpClient.get<Term[]>('http://localhost:8080/user/terms')
   }
 
-  signToTerm(id: number): Observable<Term> {
+  public signToTerm(id: number): Observable<Term> {
     return this.httpClient.get<Term>('http://localhost:8080/user/terms/register/' + id);
+  }
+
+  public unregister(): Observable<string> {
+    return this.httpClient.delete<string>('http://localhost:8080/user/terms/unregister');
   }
 }

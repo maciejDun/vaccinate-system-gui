@@ -13,10 +13,15 @@ import {Error} from "../../../model/error";
 export class UserTermComponent implements OnInit {
 
   vaccinationTerms!: Array<Term>;
-  registeredTerm!: Term;
-  problem!: Problem
+  message!: string;
 
-  signedToTerm: boolean = false;
+  registeredTerm!: Term;
+  problem!: Problem;
+
+  seeSuccess: boolean = false;
+  seeProblem: boolean = false;
+  seeTerms: boolean = true;
+  seeUnregister: boolean = false;
 
   constructor(private userTermsService: UserTermsService, private dateService: DateService) {
   }
@@ -42,18 +47,48 @@ export class UserTermComponent implements OnInit {
     return this.dateService.formatDateForView(term.vaccinationDate);
   }
 
-  signToTerm(id: number) {
-    this.userTermsService.signToTerm(id).subscribe(
+  signToTerm(termId: number) {
+    this.userTermsService.signToTerm(termId).subscribe(
       success => {
         this.registeredTerm = (<Term>success);
-        this.signedToTerm = true;
+        this.seeSuccessDiv();
       },
       error => {
-       this.problem = (<Error>error).error;
+        this.problem = (<Error>error).error;
+        this.seeProblemDiv();
       });
   }
 
   unregisterTerm() {
+    this.userTermsService.unregister().subscribe(
+      success => {
+        this.seeUnregisterDiv();
+      },
+      error => {
+        this.problem = (<Error>error).error;
+        this.seeProblemDiv();
+      }
+    )
+  }
 
+  private seeProblemDiv() {
+    this.seeSuccess = false;
+    this.seeProblem = true;
+    this.seeTerms = false;
+    this.seeUnregister = false;
+  }
+
+  private seeSuccessDiv() {
+    this.seeSuccess = true;
+    this.seeProblem = false;
+    this.seeTerms = false;
+    this.seeUnregister = false;
+  }
+
+  private seeUnregisterDiv() {
+    this.seeSuccess = false;
+    this.seeProblem = false;
+    this.seeTerms = false;
+    this.seeUnregister = true;
   }
 }

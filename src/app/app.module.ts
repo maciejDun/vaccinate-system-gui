@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {ViewComponent} from './view/view.component';
 import {TermsService} from "./service/terms.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AdminViewComponent} from './view/admin-view/admin-view.component';
 import {UserViewComponent} from './view/user-view/user-view.component';
 import {DateService} from "./service/date.service";
@@ -19,6 +19,12 @@ import {FacilityService} from "./service/facility.service";
 import {UserTermComponent} from './view/user-view/user-term/user-term.component';
 import {UserTermsService} from "./service/user-terms.service";
 import {RoleService} from "./service/role.service";
+import {CallbackComponent} from './callback/callback.component';
+import {LoginComponent} from './login/login.component';
+import {HomeComponent} from './home/home.component';
+import {AuthHeaderInterceptor} from "./oauth/interceptor/auth-header.interceptor";
+import {AppRoutingModule} from "./routing/app-routing.module";
+import {SecurityService} from "./security/security.service";
 
 @NgModule({
   declarations: [
@@ -30,15 +36,23 @@ import {RoleService} from "./service/role.service";
     UsersComponent,
     VaccinatedUsersComponent,
     FacilityComponent,
-    UserTermComponent
+    UserTermComponent,
+    CallbackComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
-  providers: [TermsService, DateService, UsersService, VaccinatedUsersService,
-    FacilityService, UserTermsService, RoleService],
+  providers: [TermsService, DateService, UsersService, VaccinatedUsersService, SecurityService,
+    FacilityService, UserTermsService, RoleService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHeaderInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
