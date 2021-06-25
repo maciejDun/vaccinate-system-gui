@@ -1,43 +1,61 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../../../service/users.service";
 import {User} from "../../../model/user";
-import {Roles} from "../../../model/roles";
 import {Problem} from "../../../model/problem";
 import {Error} from "../../../model/error";
+import {RoleService} from "../../../service/role.service";
+import {Role} from "../../../model/role";
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
 
   users!: Array<User>;
+  roles!: Role[];
 
   userName!: string;
-  roles!: Roles;
-
-  success!: User;
-  problem!: Problem;
+  roleId!: number;
+  selectedUserId!: number;
 
   closeUserList: boolean = false;
   closeCreateList: boolean = false;
   seeSuccess: boolean = false;
   seeProblem: boolean = false;
+  closeUpdateList: boolean = false;
 
-  constructor(private userService: UsersService) {
+  success!: User;
+  problem!: Problem;
+
+  constructor(private userService: UsersService, private roleService: RoleService) {
+  }
+
+  ngOnInit(): void {
+    this.loadRoles();
+    this.loadUsers();
   }
 
   clickLoad() {
     this.closeUserList = !this.closeUserList;
     this.closeCreateList = false;
-    this.loadUsers()
+    this.closeUpdateList = false;
+    if (this.closeUserList) {
+      this.loadUsers()
+    }
   }
 
   loadUsers() {
     this.userService.getUsers().subscribe(users => {
       this.users = users;
-  });
+    });
+  }
+
+  loadRoles() {
+    this.roleService.getRoles().subscribe(roles => {
+      this.roles = roles;
+    });
   }
 
   deleteUser(id: number) {
@@ -47,11 +65,31 @@ export class UsersComponent {
 
   openCreateUserTable() {
     this.closeUserList = false;
+    this.closeUpdateList = false;
     this.closeCreateList = !this.closeCreateList;
   }
 
+  openUpdateUserTable() {
+    this.closeUserList = false;
+    this.closeCreateList = false;
+    this.closeUpdateList = !this.closeUpdateList;
+  }
+
   addUser() {
-    this.userService.postUser(this.userName, this.roles).subscribe(
+    this.userService.postUser(this.userName, this.roleId).subscribe(
+      success => {
+        this.success = (<User>success);
+        this.seeSuccessDiv();
+      },
+      error => {
+        this.problem = (<Error>error).error;
+        this.seeProblemDiv();
+      }
+    );
+  }
+
+  updateUser() {
+    this.userService.putUser(this.userName, this.roleId, this.selectedUserId).subscribe(
       success => {
         this.success = (<User>success);
         this.seeSuccessDiv();

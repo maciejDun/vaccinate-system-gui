@@ -1,20 +1,24 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Term} from "../../../model/term";
 import {TermsService} from "../../../service/terms.service";
 import {DateService} from "../../../service/date.service";
 import {Problem} from "../../../model/problem";
 import {Error} from "../../../model/error";
+import {FacilityService} from "../../../service/facility.service";
+import {Facility} from "../../../model/facility";
 
 @Component({
   selector: 'app-term',
   templateUrl: './term.component.html',
   styleUrls: ['./term.component.css']
 })
-export class TermComponent {
+export class TermComponent implements OnInit {
 
   vaccinationTerms!: Array<Term>;
+  facilities!: Array<Facility>;
+
   vaccinationDate!: string;
-  facilityId!: number;
+  selectedFacilityId!: number;
 
   closeTerm: boolean = false;
   createTermValue!: boolean;
@@ -24,20 +28,31 @@ export class TermComponent {
   problem!: Problem;
   success!: Term;
 
+  constructor(private termsService: TermsService, private dateService: DateService,
+              private facilityService: FacilityService) {
+  }
 
-  constructor(private termsService: TermsService, private dateService: DateService) {
+  ngOnInit(): void {
+    this.loadFacilities();
   }
 
   clickLoad() {
     this.closeTerm = !this.closeTerm;
     this.createTermValue = false;
-    this.loadTerm();
+    if (this.closeTerm) {
+      this.loadTerm();
+    }
   }
 
   loadTerm() {
     this.termsService.getTerms().subscribe(terms => {
-      this.vaccinationTerms = terms;
-      this.mapDate();
+      this.vaccinationTerms = this.mapDate(terms);
+    });
+  }
+
+  loadFacilities() {
+    this.facilityService.getFacilities().subscribe(facilities => {
+      this.facilities = facilities;
     });
   }
 
@@ -53,7 +68,7 @@ export class TermComponent {
 
   addTerm() {
     let formattedDataForSave = this.formatDateForSave(this.vaccinationDate)
-    this.termsService.postTerm(formattedDataForSave, this.facilityId).subscribe(
+    this.termsService.postTerm(formattedDataForSave, this.selectedFacilityId).subscribe(
       data => {
         this.success = (<Term>data);
         this.seeSuccessDiv();
@@ -68,10 +83,11 @@ export class TermComponent {
     setTimeout(() => this.loadTerm(), 500);
   }
 
-  private mapDate() {
-    this.vaccinationTerms.map(term => {
+  private mapDate(terms: Array<Term>) {
+    terms.map(term => {
       term.vaccinationDate = this.formatDateForView(term);
     });
+    return terms;
   }
 
   private formatDateForView(term: Term) {

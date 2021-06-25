@@ -1,0 +1,61 @@
+<ng-container *ngIf="registeredTerm && !seeSuccess">
+  <div class="registerTerm">
+    You are registered to term: <br>
+    {{registeredTerm.vaccinationDate}} <br>
+    {{registeredTerm.facility.country}}  <br>
+    {{registeredTerm.facility.state}} <br>
+    {{registeredTerm.facility.city}} <br>
+    {{registeredTerm.facility.address}} <br>
+
+    <div class="ButtonDiv">
+      <button class="signButton" (click)="unregisterTerm()">Unregister term</button>
+    </div>
+  </div>
+
+</ng-container>
+<ng-container *ngIf="vaccinationTerms && seeTerms && !registeredTerm">
+  <div *ngFor="let term of vaccinationTerms">
+    <div class="term">
+      Date: {{term.vaccinationDate}} <br>
+      <br>
+      Country: {{term.facility.country}} <br>
+      State: {{term.facility.state}} <br>
+      City: {{term.facility.city}} <br>
+      Address: {{term.facility.address}} <br>
+      <div class="signButtonDiv">
+        <button class="signButton" (click)="signToTerm(term.id)">Sign to term</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="registeredTerm || problem">
+  <div class="registerTerm">
+
+    <div class="success" *ngIf="registeredTerm && seeSuccess">
+      <br>
+      You successfully registered to term: <br> <br>
+      Term: {{registeredTerm.vaccinationDate}}  <br>
+      <br>
+      Country: {{registeredTerm.facility.country}} <br>
+      State: {{registeredTerm.facility.state}} <br>
+      City: {{registeredTerm.facility.city}} <br>
+      Address: {{registeredTerm.facility.address}} <br>
+    </div>
+
+    <div class="success" *ngIf="seeUnregister">
+      <br>
+      You have been successfully unregistered <br> <br>
+    </div>
+
+    <div class="problem" *ngIf="problem && seeProblem">
+      <br>
+      An error occurred: <br><br>
+      Details: {{problem.detail}} <br>
+      Status: {{problem.status}} <br>
+      Title: {{problem.title}} <br>
+    </div>
+
+  </div>
+</ng-container>
+

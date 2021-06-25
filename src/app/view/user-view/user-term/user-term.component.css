@@ -1,0 +1,47 @@
+.term {
+  background-color: #2f3336;
+  padding: 20px;
+  width: 500px;
+  height: 220px;
+  margin: 20px auto;
+  font-size: 26px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+}
+
+.term:hover {
+  background-color: #3f4447;
+}
+
+.signButton {
+  float: right;
+  background-color: green;
+  display: inline-block;
+}
+
+.ButtonDiv {
+  float: left;
+  background-color: green;
+  display: inline-block;
+}
+
+.success {
+  color: green;
+  font-size: 20px;
+}
+
+.problem {
+  color: crimson;
+  font-size: 20px;
+}
+
+.registerTerm {
+  background-color: #2f3336;
+  padding: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  text-align: center;
+  width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+}

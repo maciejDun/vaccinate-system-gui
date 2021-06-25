@@ -12,6 +12,10 @@ export class TermsService {
   }
 
   public getTerms(): Observable<Term[]> {
+    return this.httpClient.get<Term[]>('http://localhost:8080/admin/terms')
+  }
+
+  public getFreeTerms(): Observable<Term[]> {
     return this.httpClient.get<Term[]>('http://localhost:8080/user/terms')
   }
 

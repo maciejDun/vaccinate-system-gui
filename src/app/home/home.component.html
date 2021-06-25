@@ -1,0 +1,6 @@
+<ng-container *ngIf="currentUser">
+  Hello {{currentUser.userName}}
+  <button (click)="logout()">Logout</button>
+  <br>
+  <app-view></app-view>
+</ng-container>
