@@ -19,7 +19,11 @@ export class UserTermsService {
     return this.httpClient.get<Term>('http://localhost:8080/user/terms/register/' + id);
   }
 
-  public unregister(): Observable<string> {
-    return this.httpClient.delete<string>('http://localhost:8080/user/terms/unregister');
+  public unregister() {
+    return this.httpClient.delete('http://localhost:8080/user/terms/unregister');
+  }
+
+  loadRegisteredTerm(): Observable<Term> {
+    return this.httpClient.get<Term>('http://localhost:8080/user/is-registered');
   }
 }

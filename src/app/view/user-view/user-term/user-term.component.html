@@ -1,7 +1,17 @@
-<ng-container>
-  <div class="ButtonDiv">
-    <button class="signButton" (click)="unregisterTerm()">Unregister term</button>
+<ng-container *ngIf="registeredTerm && !seeSuccess">
+  <div class="registerTerm">
+    You are registered to term: <br>
+    {{registeredTerm.vaccinationDate}} <br>
+    {{registeredTerm.facility.country}}  <br>
+    {{registeredTerm.facility.state}} <br>
+    {{registeredTerm.facility.city}} <br>
+    {{registeredTerm.facility.address}} <br>
+
+    <div class="ButtonDiv">
+      <button class="signButton" (click)="unregisterTerm()">Unregister term</button>
+    </div>
   </div>
+
 </ng-container>
 <ng-container *ngIf="vaccinationTerms && seeTerms && !registeredTerm">
   <div *ngFor="let term of vaccinationTerms">
@@ -37,7 +47,6 @@
       <br>
       You have been successfully unregistered <br> <br>
     </div>
-
 
     <div class="problem" *ngIf="problem && seeProblem">
       <br>

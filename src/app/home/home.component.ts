@@ -25,12 +25,19 @@ export class HomeComponent implements OnInit {
   loadCurrentUser() {
     this.userService.loadCurrentUser().subscribe((data: any) => {
       this.currentUser = data;
-    })
+    });
+    setTimeout(() => this.navigateToLogin(), 500);
   }
 
   logout() {
     this.securityService.removeToken();
     this.securityService.logout().subscribe();
     this.router.navigate(['/login']);
+  }
+
+  navigateToLogin() {
+    if (!this.currentUser) {
+      this.router.navigate(['/login'])
+    }
   }
 }

@@ -13,7 +13,6 @@ import {Error} from "../../../model/error";
 export class UserTermComponent implements OnInit {
 
   vaccinationTerms!: Array<Term>;
-  message!: string;
 
   registeredTerm!: Term;
   problem!: Problem;
@@ -28,6 +27,7 @@ export class UserTermComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTerm();
+    this.loadRegisteredTerm();
   }
 
   loadTerm() {
@@ -43,8 +43,19 @@ export class UserTermComponent implements OnInit {
     });
   }
 
+  private mapOneDate() {
+    this.registeredTerm.vaccinationDate = this.formatDateForView(this.registeredTerm);
+  }
+
   private formatDateForView(term: Term) {
     return this.dateService.formatDateForView(term.vaccinationDate);
+  }
+
+  private loadRegisteredTerm() {
+    this.userTermsService.loadRegisteredTerm().subscribe(success => {
+      this.registeredTerm = (<Term>success);
+      this.mapOneDate();
+    });
   }
 
   signToTerm(termId: number) {
