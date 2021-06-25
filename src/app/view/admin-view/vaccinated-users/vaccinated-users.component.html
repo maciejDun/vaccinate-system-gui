@@ -42,7 +42,7 @@
     <p class="title">Add Vaccinated User from selection</p>
 
     <label>Select Term</label>
-    <select (click)="loadTerm()" [(ngModel)]="selectedTermId" required="required" #termIdInput="ngModel">
+    <select (click)="loadFreeTerm()" [(ngModel)]="selectedTermId" required="required" #termIdInput="ngModel">
       <option *ngFor="let term of vaccinationTerms" [value]="term.id">
         {{term.vaccinationDate + ' ' + term.facility.city + ' ' + term.facility.address}}
       </option>

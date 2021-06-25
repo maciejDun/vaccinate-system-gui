@@ -38,7 +38,7 @@ export class VaccinatedUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadTerm();
+    this.loadFreeTerm();
     this.loadUser();
   }
 
@@ -57,19 +57,36 @@ export class VaccinatedUsersComponent implements OnInit {
     });
   }
 
-  //todo load only free terms
-  loadTerm() {
-    this.termsService.getTerms().subscribe(terms => {
-      this.vaccinationTerms = terms;
+  loadFreeTerm() {
+    this.termsService.getFreeTerms().subscribe(terms => {
+      this.vaccinationTerms = this.orderTerms(this.mapTermDate(terms));
       this.mapTermDate(terms);
     });
   }
 
-  //todo load only free users
   loadUser() {
-    this.userService.getUsers().subscribe(users => {
-      this.users = users;
+    this.userService.getNotRegisteredUsers().subscribe(users => {
+      this.users = this.orderUsers(users);
     });
+    return this.users;
+  }
+
+  private orderUsers(users: Array<User>) {
+    users.sort((user1, user2) => {
+      if (user1.id > user2.id) return 1;
+      else if (user1.id < user2.id) return -1;
+      else return 0;
+        });
+    return users;
+  }
+
+  private orderTerms(terms: Array<Term>) {
+    terms.sort((term1, term2) => {
+      if (term1.id > term2.id) return 1;
+      else if (term1.id < term2.id) return -1;
+      else return 0;
+    });
+    return terms;
   }
 
   openAddVaccinatedUser() {
@@ -106,6 +123,7 @@ export class VaccinatedUsersComponent implements OnInit {
     terms.map(term => {
       term.vaccinationDate = this.formatDateForView(term);
     });
+    return terms;
   }
 
   private formatDateForView(term: Term) {

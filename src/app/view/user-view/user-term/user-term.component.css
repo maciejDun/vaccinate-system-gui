@@ -18,3 +18,30 @@
   background-color: green;
   display: inline-block;
 }
+
+.ButtonDiv {
+  float: left;
+  background-color: green;
+  display: inline-block;
+}
+
+.success {
+  color: green;
+  font-size: 20px;
+}
+
+.problem {
+  color: crimson;
+  font-size: 20px;
+}
+
+.registerTerm {
+  background-color: #2f3336;
+  padding: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #efefef;
+  text-align: center;
+  width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+}
