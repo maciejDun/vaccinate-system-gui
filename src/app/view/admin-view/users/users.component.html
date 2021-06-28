@@ -26,7 +26,7 @@
     <label>Select Role</label>
     <select (click)="loadRoles()" [(ngModel)]="roleId" required="required" #roleInput="ngModel">
       <option *ngFor="let role of roles" [value]="role.id">
-        {{role.roles}}
+        {{role.label}}
       </option>
     </select>
 
@@ -50,7 +50,7 @@
       <br>
       Id: {{success.id}} <br>
       Role:
-      <span *ngFor="let role of success.roles">{{role.roles}}  </span>
+      <span *ngFor="let role of success.roles">{{role.label}}  </span>
     </div>
 
     <div class="problem" *ngIf="problem && seeProblem">
@@ -85,7 +85,7 @@
     <label>Select Role</label>
     <select (click)="loadRoles()" [(ngModel)]="roleId" required="required" #roleInput="ngModel">
       <option *ngFor="let role of roles" [value]="role.id">
-        {{role.roles}}
+        {{role.label}}
       </option>
     </select>
 
@@ -115,7 +115,7 @@
       <br>
       Id: {{success.id}} <br>
       Role:
-      <span *ngFor="let role of success.roles">{{role.roles}}  </span>
+      <span *ngFor="let role of success.roles">{{role.label}}  </span>
     </div>
 
     <div class="problem" *ngIf="problem && seeProblem">
