@@ -19,7 +19,6 @@ export class ViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('something')
     this.loadCurrentUser();
     setTimeout(() => this.choosePanel(), 200);
   }
