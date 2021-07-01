@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Term} from "../model/term";
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +13,18 @@ export class UserTermsService {
   }
 
   public getTerms(): Observable<Term[]> {
-    return this.httpClient.get<Term[]>('http://localhost:8080/user/terms')
+    return this.httpClient.get<Term[]>(environment.baseUrl + '/user/terms')
   }
 
   public signToTerm(id: number): Observable<Term> {
-    return this.httpClient.get<Term>('http://localhost:8080/user/terms/register/' + id);
+    return this.httpClient.get<Term>(environment.baseUrl + '/user/terms/register/' + id);
   }
 
   public unregister() {
-    return this.httpClient.delete('http://localhost:8080/user/terms/unregister');
+    return this.httpClient.delete(environment.baseUrl + '/user/terms/unregister');
   }
 
   loadRegisteredTerm(): Observable<Term> {
-    return this.httpClient.get<Term>('http://localhost:8080/user/is-registered');
+    return this.httpClient.get<Term>(environment.baseUrl + '/user/is-registered');
   }
 }
