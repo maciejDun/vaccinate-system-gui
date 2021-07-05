@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {VaccinatedUser} from "../model/vaccinated.user";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,15 @@ export class VaccinatedUsersService {
   }
 
   public getVaccinatedUsers(): Observable<VaccinatedUser[]> {
-    return this.httpClient.get<VaccinatedUser[]>('http://localhost:8080/admin/vaccinated-users')
+    return this.httpClient.get<VaccinatedUser[]>(environment.baseUrl + '/admin/vaccinated-users')
   }
 
   deleteVaccinatedUser(id: number) {
-    return this.httpClient.delete('http://localhost:8080/admin/vaccinated-users/' + id);
+    return this.httpClient.delete(environment.baseUrl + '/admin/vaccinated-users/' + id);
   }
 
   public postVaccinatedUser(userId: number, termId: number) {
-    let url = 'http://localhost:8080/admin/vaccinated-users?userId=' + userId + '&termId=' + termId;
+    let url = environment.baseUrl + '/admin/vaccinated-users?userId=' + userId + '&termId=' + termId;
     return this.httpClient.post(url, null);
   }
 }
