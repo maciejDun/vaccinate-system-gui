@@ -13,7 +13,7 @@ export class UsersService {
   }
 
   public getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>('http://localhost:8080/admin/users')
+    return this.httpClient.get<User[]>(environment.baseUrl + '/admin/users')
   }
 
   loadCurrentUser(): Observable<User> {
@@ -21,21 +21,21 @@ export class UsersService {
   }
 
   public getNotRegisteredUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>('http://localhost:8080/admin/not-registered-users')
+    return this.httpClient.get<User[]>(environment.baseUrl + '/admin/not-registered-users')
   }
 
   deleteUser(id: number) {
-    return this.httpClient.delete('http://localhost:8080/admin/users/' + id);
+    return this.httpClient.delete(environment.baseUrl + '/admin/users/' + id);
   }
 
   public postUser(name: string, roleId: number) {
     let body = {userName: name, roleId: roleId}
-    return this.httpClient.post('http://localhost:8080/admin/users', body);
+    return this.httpClient.post(environment.baseUrl + '/admin/users', body);
   }
 
   public putUser(name: string, roleId: number, userId: number) {
     let body = {id: userId, userName: name, roleId: roleId}
-    return this.httpClient.put('http://localhost:8080/admin/users', body);
+    return this.httpClient.put(environment.baseUrl + '/admin/users', body);
   }
 
 }
